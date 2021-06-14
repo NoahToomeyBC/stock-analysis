@@ -1,0 +1,217 @@
+Sub Macrocheck()
+
+Dim testMessage As String
+
+testMessage = "Hello World!"
+
+MsgBox (testMessage)
+
+End Sub
+
+Sub DQAnalysis()
+
+    Worksheets("DQ Analysis").Activate
+
+    Range("A1").Value = "DAQO (Ticker: DQ)"
+
+    'This made a header row
+    Cells(3, 1).Value = "Year"
+    Cells(3, 2).Value = "Total Daily Volume"
+    Cells(3, 3).Value = "Return"
+  
+    Worksheets("2018").Activate
+      
+    totalVolume = 0
+
+
+    Dim startingPrice As Double
+    Dim endingPrice As Double
+    
+        'find the number of rows to loop over
+        RowCount = Cells(Rows.Count, "A").End(xlUp).Row
+    
+    For i = 2 To RowCount
+        
+        If Cells(i, 1).Value = "DQ" Then
+        
+            'increase totalVolume by the value in the current row
+            totalVolume = totalVolume + Cells(i, 8).Value
+            
+        End If
+
+        If Cells(i - 1, 1).Value <> "DQ" And Cells(i, 1).Value = "DQ" Then
+    
+            'set starting price
+            startingPrice = Cells(i, 6).Value
+           
+        End If
+        
+        If Cells(i + 1, 1).Value <> "DQ" And Cells(i, 1).Value = "DQ" Then
+        
+            'set ending price
+            endingPrice = Cells(i, 6).Value
+        End If
+        
+    Next i
+
+    Worksheets("DQ Analysis").Activate
+        'Output values into corresponding cells
+        Cells(4, 1).Value = 2018
+        Cells(4, 2).Value = totalVolume
+        Cells(4, 3).Value = endingPrice / startingPrice - 1
+    
+End Sub
+
+
+Sub AllStocksAnalysis()
+
+    Worksheets("All Stocks Analysis").Activate
+        
+        Range("A1").Value = "All Stocks (2018)"
+        
+        'Make Header rows
+        Cells(3, 1).Value = "Ticker"
+        Cells(3, 2).Value = "Total Daily Volume"
+        Cells(3, 3).Value = "Return"
+    
+    Dim tickers(12) As String
+    
+    'Create array for different stock names
+        tickers(0) = "AY"
+        tickers(1) = "CSIQ"
+        tickers(2) = "DQ"
+        tickers(3) = "ENPH"
+        tickers(4) = "FSLR"
+        tickers(5) = "HASI"
+        tickers(6) = "JKS"
+        tickers(7) = "RUN"
+        tickers(8) = "SEDG"
+        tickers(9) = "SPWR"
+        tickers(10) = "TERP"
+        tickers(11) = "VSLR"
+        
+   'Initialize variables
+   
+    Dim startingPrice As Single
+    Dim endingPrice As Single
+    
+    'Activate dataworksheet
+    
+    Worksheets("2018").Activate
+    
+    'Find rows
+         RowCount = Cells(Rows.Count, "A").End(xlUp).Row
+         
+    For i = 0 To 11
+        ticker = tickers(i)
+        totalVolume = 0
+        
+        Worksheets("2018").Activate
+        
+        For j = 2 To RowCount
+        
+            'Set totalVolume for current ticker
+            If Cells(j, 1).Value = ticker Then
+                
+                totalVolume = totalVolume + Cells(j, 8).Value
+            
+            End If
+            
+            'set startingPrice for current ticker
+            If Cells(j - 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
+                
+                startingPrice = Cells(j, 6).Value
+           
+            End If
+            
+            'set endingPrice for current ticker
+            If Cells(j + 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
+                
+                endingPrice = Cells(j, 6).Value
+           
+            End If
+        
+        Next j
+        
+        'Output Data for Current ticker
+        Worksheets("All Stocks Analysis").Activate
+        Cells(4 + i, 1).Value = ticker
+        Cells(4 + i, 2).Value = totalVolume
+        Cells(4 + i, 3).Value = endingPrice / startingPrice - 1
+        
+    Next i
+
+    
+End Sub
+
+Sub SkillDrill()
+
+    Worksheets("Skill Drill").Activate
+    
+    Dim i As Integer, j As Integer
+    'Puts sum of colum and row number into corresponding cell
+    For i = 1 To 10
+        For j = 1 To 10
+            Cells(i, j).Value = j + i
+        Next j
+    Next i
+End Sub
+Sub ClearSkillDrill()
+
+    Sheets("Skill Drill").Cells.Clear
+    
+End Sub
+
+
+Sub formatAllStocksAnalysisTable()
+    
+    'Formatting
+    Worksheets("All Stocks Analysis").Activate
+    
+        Range("A3:C3").Font.Bold = True
+        Range("A3:C3").Borders(xlEdgeBottom).LineStyle = xlContinuous
+        Range("A3:C3").Font.Color = RGB(0, 0, 255)
+        Range("A3:C3").Font.FontStyle = "Bold Italic"
+        Range("A3:C3").Font.Italic = True
+        Range("B4:B15").NumberFormat = "$#,##0"
+        Range("C4:C15").NumberFormat = "0.00%"
+        Columns("B").AutoFit
+        
+    'Make negative return = red, positve return = green
+    Worksheets("All Stocks Analysis").Activate
+        Dim c As Range
+        For Each c In Range("C4:c15")
+            
+            If c.Value < 0 Then
+                c.Font.Color = vbRed
+            ElseIf c.Value > 0 Then
+                c.Font.Color = vbGreen
+            Else: c.Font.Color = xlNone
+            End If
+        Next
+            
+End Sub
+        
+Sub SkillDrill2()
+
+    'Make a 10 x 10 checkerboard
+    'code refactored from https://www.mrexcel.com/board/threads/chessboard-with-vba.711243/
+    Worksheets("Skill Drill 2").Activate
+        dataRowStart = 1
+        dataRowEnd = 10
+        dataColumnStart = 1
+        dataColumnEnd = 10
+        
+        For c = dataRowStart To dataRowEnd
+            For r = dataColumnStart To dataColumnEnd
+                Cells(1, 1).Offset(r - 1, c - 1).Interior.ColorIndex = (r + c) Mod 2 + 1
+            Next r
+        Next c
+
+End Sub
+
+            
+       
+        
+
+
