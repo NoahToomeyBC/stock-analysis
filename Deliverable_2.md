@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Kickstarting with Excel
+# VBA of Wallstreet
 
 ## Overview of Project
 
@@ -10,13 +9,22 @@ In this project, we were tasked with finding a way to create a piece of looping 
 
 ### Results
 
+#### What the data shows us.
+
+In 2017, almost all of the stocks created a positive return making it seem like all of the options of green stocks seem relatively safe (except for TERP). However, after running our analysis on 2018 we found that the opposite to be true. All but two stock options made negative returns in 2018 (ENPH and RUN). Looking at the data itself (without taking into account outside factors such as marketing and public perception on "green" businesses), it shows that the majority of these green stocks are relatively volatile and more due diligence should be performed to get a more complete look at the risk or reward of these 12 green stocks moving forward.
 
 
-![2017 Code Before Refactoring]
+
+
+As already discussed, our code was running for almost a whole second. Which, in today's world of high-powered machines in our pockets is very slow compared to what most people are accustomed to using on a daily basis.  
+
+#### 2017 Code Not Refactored
+
+![2017_Not_Refactored](https://user-images.githubusercontent.com/85508764/122947429-c23b5200-d33f-11eb-8433-2c9fea3a3507.png)
 
 
 
-![Function and Data Table for Outcomes Based on Goals](C:\Users\noaht\Desktop\Class_Files\module1\OBG.png)
+
 
 ### Summary
 
@@ -28,7 +36,5 @@ In this project, we were tasked with finding a way to create a piece of looping 
 - Disadvantages of Refactoring Code
 
 - How do these pros and cons apply to refactoring the original VBA script?
-=======
 
->>>>>>> 37f727e36b2b1dd542f79ca8cdc82cc40495f6af
 # stock-analysis
