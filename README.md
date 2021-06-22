@@ -45,5 +45,3 @@ Refactoring our code made it so that we can easily add more data to our workbook
 - Disadvantages of Refactoring Code
 
 The main disadvantage that I could see with refactoring code is that it takes more time away from development of other macros and other ways to analyze the data that was given in the workbook. However, within the scope of this project, I cannot find a disadvantage to refactoring this code besides the time it took to refactor and, with practice, that should be a non-issue.
-
-# stock-analysis
