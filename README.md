@@ -36,7 +36,7 @@ As already discussed, our code was running for almost a whole second. Which, in 
 
 ### Summary
 
-## What Are the Advantages or Disadvantages of Refactoring code
+## Advantages or Disadvantages of Refactoring Code and How Refactoring Applies to This Project
 
 - Advantages of Refactoring Code
 
@@ -44,8 +44,6 @@ Refactoring our code made it so that we can easily add more data to our workbook
 
 - Disadvantages of Refactoring Code
 
-The main disadvantage that I could see with refactoring code is that it takes more time away from development of other macros and other ways to analyze the data that was given in the workbook.  
-
-- How do these pros and cons apply to refactoring the original VBA script?
+The main disadvantage that I could see with refactoring code is that it takes more time away from development of other macros and other ways to analyze the data that was given in the workbook. However, within the scope of this project, I cannot find a disadvantage to refactoring this code besides the time it took to refactor and, with practice, that should be a non-issue.
 
 # stock-analysis
